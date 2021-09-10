@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.viavarejo.apresentacao.domain.Filial;
 import br.com.viavarejo.apresentacao.domain.FilialChave;
 import br.com.viavarejo.apresentacao.repositories.FilialRepository;
+import br.com.viavarejo.apresentacao.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class FilialService {
@@ -20,7 +21,7 @@ public class FilialService {
 	}
 	
 	public Filial findById(FilialChave filialChave) {
-		Filial filial = repo.findById(filialChave).orElseThrow(() -> new RuntimeException("Registro não encontrado"));
+		Filial filial = repo.findById(filialChave).orElseThrow(() -> new ObjectNotFoundException("Registro não encontrado"));
 		
 		return filial;		
 	}
