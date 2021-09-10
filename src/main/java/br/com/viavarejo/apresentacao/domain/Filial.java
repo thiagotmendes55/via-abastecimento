@@ -1,7 +1,12 @@
 package br.com.viavarejo.apresentacao.domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @IdClass(FilialChave.class)
@@ -20,7 +25,9 @@ public class Filial implements Serializable {
 	private Integer numero;
 	private String bairro;
 	private String cidade;
-	private String uf;
+	@ManyToOne
+	@JoinColumn(name = "uf")
+	private Estado estado;
 	private String cep;
 	private Integer empresaAbastecimento;
 	private Integer filialAbastecimento;
@@ -29,7 +36,7 @@ public class Filial implements Serializable {
 	public Filial() {
 	}
 
-	public Filial(Integer empresa, Integer filial, String tipoDeAtividade, String cnpj, String descricaoFilial, String endereco, Integer numero, String bairro, String cidade, String uf, String cep, Integer empresaAbastecimento, Integer filialAbastecimento, String tipoDeAtividadeAbastecimento) {
+	public Filial(Integer empresa, Integer filial, String tipoDeAtividade, String cnpj, String descricaoFilial, String endereco, Integer numero, String bairro, String cidade, Estado estado, String cep, Integer empresaAbastecimento, Integer filialAbastecimento, String tipoDeAtividadeAbastecimento) {
 		this.empresa = empresa;
 		this.filial = filial;
 		this.tipoDeAtividade = tipoDeAtividade;
@@ -39,7 +46,7 @@ public class Filial implements Serializable {
 		this.numero = numero;
 		this.bairro = bairro;
 		this.cidade = cidade;
-		this.uf = uf;
+		this.estado = estado;
 		this.cep = cep;
 		this.empresaAbastecimento = empresaAbastecimento;
 		this.filialAbastecimento = filialAbastecimento;
@@ -118,12 +125,12 @@ public class Filial implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public String getUf() {
-		return uf;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public String getCep() {
